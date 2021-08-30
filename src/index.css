@@ -26,33 +26,45 @@
 
 body {
   font-family: var(--font-family);
-  background-color: var(--color-gray);
 }
 
 .primary-btn {
-  padding: 0.4rem 0 0.4rem 0;
+  padding: 0.4rem;
   color: var(--color-background-dark);
   border-radius: 0.25rem;
   border: 1px solid var(--color-orange);
   background-color: var(--color-yellow-light);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .secondary-btn {
-  padding: 0.4rem 0 0.4rem 0;
+  padding: 0.4rem;
   color: var(--color-background-dark);
   border-radius: 0.25rem;
   background-color: var(--color-orange);
+  border: 1px solid var(--color-yellow-light);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .danger-btn {
-  padding: 0.4rem 0 0.4rem 0;
+  padding: 0.4rem;
   color: var(--color-background-dark);
   border-radius: 0.25rem;
   border: 1px solid var(--color-background-dark);
   background-color: var(--color-gray);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .sm {
