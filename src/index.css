@@ -1,0 +1,73 @@
+:root {
+  --color-background-light: #37475a;
+  --color-background-medium: #232f3e;
+  --color-background-dark: #0f1111;
+  --color-gray: #eaeded;
+  --color-yellow-light: #f0c14b;
+  --color-yellow-orangish: #febd69;
+  --color-orange: #ffa41c;
+  --color-cyan-blue: #007185;
+  --color-brown: #b12704;
+  --color-brown-light: #c45500;
+  --color-green: #007600;
+  --font-size-sm: 0.9rem;
+  --font-size-sm-md: 1rem;
+  --font-size-md: 1.1rem;
+  --font-size-md-lg: 1.2rem;
+  --font-size-lg: 1.4rem;
+  --font-family: "Roboto", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-gray);
+}
+
+.primary-btn {
+  padding: 0.4rem 0 0.4rem 0;
+  color: var(--color-background-dark);
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-orange);
+  background-color: var(--color-yellow-light);
+  cursor: pointer;
+}
+
+.secondary-btn {
+  padding: 0.4rem 0 0.4rem 0;
+  color: var(--color-background-dark);
+  border-radius: 0.25rem;
+  background-color: var(--color-orange);
+  cursor: pointer;
+}
+
+.danger-btn {
+  padding: 0.4rem 0 0.4rem 0;
+  color: var(--color-background-dark);
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-background-dark);
+  background-color: var(--color-gray);
+  cursor: pointer;
+}
+
+.sm {
+  font-size: var(--font-size-sm);
+}
+
+.lg {
+  font-size: var(--font-size-lg);
+}
+.md {
+  font-size: var(--font-size-md);
+}
+.sm-md {
+  font-size: var(--font-size-sm-md);
+}
+.md-lg {
+  font-size: var(--font-size-md-lg);
+}

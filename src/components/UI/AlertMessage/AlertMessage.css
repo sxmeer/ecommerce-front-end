@@ -1,0 +1,19 @@
+.alertMessage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.alertMessage > * {
+  margin-top: 1.5rem;
+}
+.alertMessage img {
+  height: 2rem;
+  margin-top: 1rem;
+  object-fit: contain;
+}
+
+.alertMessage__negBtn {
+  width: 25%;
+}
