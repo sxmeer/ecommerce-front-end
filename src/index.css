@@ -4,7 +4,7 @@
   --color-background-dark: #0f1111;
   --color-gray: #eaeded;
   --color-yellow-light: #f0c14b;
-  --color-yellow-orangish: #febd69;
+  --color-yellow-orangish: #f7ca00;
   --color-orange: #ffa41c;
   --color-cyan-blue: #007185;
   --color-brown: #b12704;
@@ -26,6 +26,7 @@
 
 body {
   font-family: var(--font-family);
+  background-color: var(--color-gray);
 }
 
 .primary-btn {
@@ -59,7 +60,20 @@ body {
   color: var(--color-background-dark);
   border-radius: 0.25rem;
   border: 1px solid var(--color-background-dark);
-  background-color: var(--color-gray);
+  background-color: v ar(--color-gray);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.ascent-btn {
+  padding: 0.4rem;
+  color: var(--color-background-dark);
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-yellow-orangish);
+  background-color: var(--color-yellow-orangish);
   cursor: pointer;
   display: flex;
   justify-content: center;

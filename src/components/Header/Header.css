@@ -1,0 +1,58 @@
+.HeaderFix {
+  background-color: var(--color-background-medium);
+  color: white;
+  padding: 1rem 0rem;
+}
+
+.HeaderFix__container {
+  max-width: 1020px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.HeaderFix__logo {
+  height: 2rem;
+  object-fit: contain;
+  align-self: center;
+}
+
+.HeaderFix__links {
+  display: flex;
+  flex-direction: column;
+}
+
+.HeaderFix__linksTop {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  align-items: center;
+}
+
+.Header .links {
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: color 0.3s;
+}
+
+.Header .links:hover {
+  color: var(--color-orange);
+}
+
+.Header__options {
+  background-color: var(--color-background-light);
+  color: white;
+  transition: all 0.5s linear;
+}
+
+.Header__optionsContainer {
+  max-width: 1020px;
+  margin: auto;
+  display: flex;
+  gap: 2rem;
+  font-size: var(--font-size-sm);
+  padding: 0.25rem 0;
+  justify-content: flex-start;
+  align-items: center;
+}
