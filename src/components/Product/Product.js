@@ -6,7 +6,7 @@ const Product = ({ product }) => {
     <img className="Product__img" src={product.image.imgUrl} alt="" />
     <p className="Product__title">{product.name}</p>
     <p className="Product__description">{product.description}</p>
-    <p><span className="Product__sm">₹ </span><span className="Product__price">{product.price}</span></p>
+    <p><span className="Product__sm brn">₹ </span><span className="Product__price brn">{product.price}</span></p>
     <div className="Product__links"><span className="Product__sm">Quantity</span>
       <select className="Product__quantity" name="" id="">
         <option value="1" defaultValue>1</option>

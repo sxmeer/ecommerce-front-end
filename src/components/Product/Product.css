@@ -31,6 +31,10 @@
   font-weight: 300;
 }
 
+.Product .brn {
+  color: var(--color-brown);
+}
+
 .Product__sm {
   font-size: var(--font-size-sm);
   font-weight: 300;

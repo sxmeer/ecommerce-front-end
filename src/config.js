@@ -1,0 +1,23 @@
+const ORDER_STATUS = {
+  STATUS_NEW: "New",
+  STATUS_PROCESSING: "Processing",
+  STATUS_SHIPPED: "Shipped",
+  STATUS_DELIVERED: "Delivered"
+};
+
+const PAYMENT_STATUS = {
+  STATUS_NOT_PAID: "Not paid",
+  STATUS_PAID: "Paid"
+};
+
+const PAYMENT_METHOD = {
+  METHOD_COD: "Cash on delivery",
+  METHOD_ONLINE_PAYMENT: "Online payment"
+};
+
+const USER_TYPES = {
+  TYPE_ADMIN: "TYPE_ADMIN",
+  TYPE_REGULAR: "TYPE_REGULAR"
+};
+
+export { ORDER_STATUS, PAYMENT_STATUS, PAYMENT_METHOD, USER_TYPES };
