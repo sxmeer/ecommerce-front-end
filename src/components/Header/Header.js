@@ -14,11 +14,11 @@ const Header = props => {
   </>;
 
   let linksBottom = isLoggedIn ? <>
-    <p className="links" to="/cart"><i class="fa fa-home"></i> Home</p>
-    <p className="links" to="/cart"><i class="fa fa-shopping-cart"></i> My Cart</p>
-    <p className="links" to="/orders"><i class="fa fa-list-ul"></i> My Orders</p>
-    <p className="links"><i class="fa fa-plus-circle"></i> Create Product</p>
-    <p className="links"><i class="fa fa-list-alt"></i> All Orders</p>
+    <p className="links" to="/cart"><i className="fa fa-home"></i> Home</p>
+    <p className="links" to="/cart"><i className="fa fa-shopping-cart"></i> My Cart</p>
+    <p className="links" to="/orders"><i className="fa fa-list-ul"></i> My Orders</p>
+    <p className="links"><i className="fa fa-plus-circle"></i> Create Product</p>
+    <p className="links"><i className="fa fa-list-alt"></i> All Orders</p>
   </> : null;
 
   return <div className="Header">
