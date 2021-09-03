@@ -11,17 +11,19 @@ import ProductDetail from '../Product/ProductDetail/ProductDetail';
 import Logout from '../Logout/Logout';
 import './Layout.css';
 
+import { PRODUCT_COMPONENT_MODES } from '../../config';
+
 const Layout = () => {
   return (
     <div className="Layout">
       <Switch>
         <Route path="/" component={Home} exact />
-        <Route path="/product/:id" component={ProductDetail} />
-        <Route path="/product/" createMode component={ProductDetail} />
+        <Route path="/product/:id" mode={PRODUCT_COMPONENT_MODES.VIEW_MODE} component={ProductDetail} />
+        <AdminRoute path="/product/" mode={PRODUCT_COMPONENT_MODES.CREATE_MODE} component={ProductDetail} />
         <PrivateRoute path="/cart" component={Cart} />
         <PrivateRoute path="/orders" component={Orders} />
-        <PrivateRoute path="/logout" component={Logout} />
         <AdminRoute path="/all-orders" isAdmin component={Orders} />
+        <PrivateRoute path="/logout" component={Logout} />
         <Redirect to="/" />
       </Switch>
     </div>

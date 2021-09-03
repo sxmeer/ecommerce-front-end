@@ -111,12 +111,20 @@ const PRODUCT_VALIDATION = {
   },
   description: {
     required: true,
-    maxlength: 2000,
+    maxLength: 2000,
     minLength: 10
   },
   price: {
-    required: true
+    required: true,
+    positiveNumber: true
   }
+}
+
+const IMAGE_CONFIG = {
+  SUPPORTED_FORMATS: ["image/png", "image/jpeg"],
+  SUPPORTED_FORMATS_TEXT: [".png", ".jpeg", ".jpg"],
+  MAX_SIZE: 2 * 1024 * 1024,
+  MAX_SIZE_TEXT: "2MB"
 }
 
 const checkValidity = (value, rules) => {
@@ -133,10 +141,21 @@ const checkValidity = (value, rules) => {
   if (rules.maxLength) {
     isValid = value.trim().length <= rules.maxLength && isValid;
   }
+  if (rules.positiveNumber) {
+    let tempVal = Number(value);
+    isValid = Number.isInteger(tempVal) && tempVal > 0 && isValid;
+  }
+  return isValid;
 }
 
+const PRODUCT_COMPONENT_MODES = {
+  VIEW_MODE: "VIEW_MODE",
+  CREATE_MODE: "CREATE_MODE",
+  EDIT_MODE: "EDIT_MODE"
+};
+
 export {
-  ORDER_STATUS, PAYMENT_STATUS, PAYMENT_METHOD, USER_TYPES,
-  SIGNUP_CONFIG, LOGIN_CONFIG, PRODUCT_VALIDATION,
+  ORDER_STATUS, PAYMENT_STATUS, PAYMENT_METHOD, USER_TYPES, IMAGE_CONFIG,
+  SIGNUP_CONFIG, LOGIN_CONFIG, PRODUCT_VALIDATION, PRODUCT_COMPONENT_MODES,
   checkValidity
 };
