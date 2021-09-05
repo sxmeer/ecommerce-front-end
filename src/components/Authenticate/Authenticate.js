@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import Modal from '../UI/Modal/Modal';
-import './Authenticate.css';
-import logo from '../../assets/logo_dark.svg';
 import { LOGIN_CONFIG, SIGNUP_CONFIG, checkValidity } from '../../config';
+import axios from '../../axios-config';
 
-const Authenticate = (props) => {
-  const [isLoginMode, setLoginMode] = useState(props.mode);
+import Modal from '../UI/Modal/Modal';
+import logo from '../../assets/logo_dark.svg';
+import './Authenticate.css';
+import { login } from '../../store/actionsCreators';
+import { connect } from 'react-redux';
+import AlertMessage from '../UI/AlertMessage/AlertMessage';
+
+const Authenticate = React.memo((props) => {
+  const [isLoginMode, setLoginMode] = useState(props.isLoginMode);
   const [loginState, setLoginState] = useState({
     fields: {
       email: {
@@ -17,9 +22,10 @@ const Authenticate = (props) => {
         isValid: false,
       }
     },
-    error: ""
   });
   const [signUpState, setSignUpState] = useState({
+    isAccountCreated: false,
+    error: null,
     fields: {
       sFirstName: {
         value: '',
@@ -42,8 +48,28 @@ const Authenticate = (props) => {
         isValid: false,
       },
     },
-    error: "",
   });
+
+  const logIn = () => {
+    props.login(loginState.fields.email.value.trim(), loginState.fields.password.value.trim());
+  }
+
+  const signUp = () => {
+    props.toggleLoader(true);
+    axios.post('/auth/signup', {
+      firstName: signUpState.fields.sFirstName.value.trim(),
+      lastName: signUpState.fields.sLastName.value.trim(),
+      email: signUpState.fields.sEmail.value.trim(),
+      password: signUpState.fields.sPassword.value.trim(),
+      confirmPassword: signUpState.fields.sConfirmPassword.value.trim()
+    }).then(response => {
+      props.toggleLoader(false);
+      setSignUpState({ ...signUpState, isAccountCreated: true });
+    }).catch(error => {
+      props.toggleLoader(false);
+      setSignUpState({ ...signUpState, error: error.response.data.message });
+    });
+  }
 
   const changeMode = (isLoginMode) => {
     setLoginState({
@@ -56,10 +82,11 @@ const Authenticate = (props) => {
           value: '',
           isValid: false,
         }
-      },
-      error: ""
+      }
     });
     setSignUpState({
+      isAccountCreated: false,
+      error: null,
       fields: {
         sFirstName: {
           value: '',
@@ -81,17 +108,17 @@ const Authenticate = (props) => {
           value: '',
           isValid: false,
         },
-      },
-      error: "",
+      }
     });
     setLoginMode(isLoginMode);
   }
 
   const loginInputHandler = (event) => {
     let { value, id } = event.target;
+    let isValid = checkValidity(value, LOGIN_CONFIG[id].validation);
     let field = {
       value,
-      isValid: checkValidity(value, LOGIN_CONFIG[id].validation)
+      isValid
     };
     setLoginState(prevState => {
       let fields = { ...prevState.fields };
@@ -109,18 +136,21 @@ const Authenticate = (props) => {
     setSignUpState(prevState => {
       let fields = { ...prevState.fields };
       fields[id] = field;
-      return { ...prevState, fields };
+      return { ...prevState, fields, error: null };
     });
   };
-
 
   return (
     <Modal
       show={true}
-      onClose={() => { }}>
+      closeModal={props.onClose}>
       <div className="Authenticate">
         <img src={logo} alt="" className="Authenticate__img" />
-
+        {signUpState.isAccountCreated && <AlertMessage
+          show
+          message="Your account has been created. Please login to continue."
+          positiveBtn="OK"
+          onPositiveBtnClick={props.onClose} />}
         {/* login section */}
         <div className={`Authenticate__logIn ${isLoginMode ? 'mode' : ''}`}>
           <div>
@@ -128,15 +158,22 @@ const Authenticate = (props) => {
             {Object.keys(LOGIN_CONFIG).map(config =>
             (<div key={config} className="form__input">
               <label htmlFor={config}>{LOGIN_CONFIG[config].label}</label>
-              <input id={config} {...LOGIN_CONFIG[config].props} value={loginState.fields[config].value}
+              <input
+                id={config}
+                {...LOGIN_CONFIG[config].props}
+                value={loginState.fields[config].value}
                 onChange={loginInputHandler} />
             </div>)
             )}
             <div className="form__input">
-              <input type="submit" value="Continue" className='primary-btn' />
+              <input
+                type="submit"
+                value="Continue"
+                onClick={logIn}
+                className='primary-btn' />
             </div>
             <p className="error">
-              {loginState.error}
+              {props.error}
             </p>
           </div>
           <div>
@@ -155,11 +192,19 @@ const Authenticate = (props) => {
           {Object.keys(SIGNUP_CONFIG).map(config =>
           (<div key={config} className="form__input">
             <label htmlFor={config}>{SIGNUP_CONFIG[config].label}</label>
-            <input id={config} {...SIGNUP_CONFIG[config].props} value={signUpState.fields[config].value} onChange={signupInputHandler} />
+            <input
+              id={config}
+              {...SIGNUP_CONFIG[config].props}
+              value={signUpState.fields[config].value}
+              onChange={signupInputHandler} />
           </div>)
           )}
           <div className="form__input">
-            <input type="submit" value="Create" onClick={() => { }} className='primary-btn' />
+            <input
+              type="submit"
+              value="Create"
+              onClick={signUp}
+              className='primary-btn' />
           </div>
           <p className="error">
             {signUpState.error}
@@ -175,6 +220,18 @@ const Authenticate = (props) => {
       </div>
     </Modal>
   )
-}
+});
 
-export default Authenticate;
+const mapStateToProps = state => {
+  return {
+    error: state.auth.error
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    login: (email, password) => dispatch(login(email, password))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Authenticate);

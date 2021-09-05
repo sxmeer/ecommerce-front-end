@@ -5,7 +5,7 @@ const initialState = {
   page: 0,
   limit: 5,
   error: null,
-  isFetching: false,
+  isLoading: false,
   orders: []
 }
 

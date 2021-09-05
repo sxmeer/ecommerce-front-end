@@ -1,1 +1,1 @@
-//export all the action creators
+export { login, logout } from './auth';

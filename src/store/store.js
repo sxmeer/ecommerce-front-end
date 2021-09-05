@@ -4,14 +4,14 @@ import allOrders from './reducers/allOrders';
 import myCart from './reducers/myCart';
 import myOrders from './reducers/myOrders';
 import products from './reducers/products';
-import user from './reducers/user';
+import auth from './reducers/auth';
 
 const reducers = combineReducers({
   allOrders,
   myCart,
   myOrders,
   products,
-  user
+  auth
 });
 
 const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;

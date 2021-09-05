@@ -23,7 +23,7 @@ const privateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.user.token !== null
+    isAuthenticated: state.auth.token !== null
   };
 };
 

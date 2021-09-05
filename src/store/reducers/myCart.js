@@ -1,7 +1,7 @@
 const initialState = {
   totalPrice: null,
   products: [],
-  isFetching: false,
+  isLoading: false,
   error: null
 };
 
