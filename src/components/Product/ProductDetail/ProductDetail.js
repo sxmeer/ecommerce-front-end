@@ -29,28 +29,28 @@ const ProductDetail = ({ product, defaultMode }) => {
     }
   });
 
-  useEffect(() => {
-    setTimeout(() => {
-      setProductForm({
-        image: {
-          imageFile: null,
-          imageUrl: product.image.imageUrl
-        },
-        price: {
-          value: product.price,
-          isValid: true
-        },
-        name: {
-          value: product.name,
-          isValid: true
-        },
-        description: {
-          value: product.description,
-          isValid: true
-        }
-      })
-    }, 2000);
-  }, [product]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setProductForm({
+  //       image: {
+  //         imageFile: null,
+  //         imageUrl: product.image.imageUrl
+  //       },
+  //       price: {
+  //         value: product.price,
+  //         isValid: true
+  //       },
+  //       name: {
+  //         value: product.name,
+  //         isValid: true
+  //       },
+  //       description: {
+  //         value: product.description,
+  //         isValid: true
+  //       }
+  //     })
+  //   }, 2000);
+  // }, [product]);
 
   const imageHandler = (event) => {
     if (event.target.files.length > 0) {

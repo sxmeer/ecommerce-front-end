@@ -18,6 +18,7 @@ const reducer = (state = initialState, action) => {
     case actions.LOGIN_SUCCESS: return loginSuccess(state, action);
     case actions.LOGIN_FAILURE: return loginFailure(state, action);
     case actions.LOGIN_FAILURE_CLR_MSG: return loginFailureClrMsg(state, action);
+    case actions.PREV_LOGIN: return prevLogin(state, action);
     case actions.LOGOUT_START: return logoutStart(state, action);
     case actions.LOGOUT_SUCCESS: return logoutSuccess(state, action);
     case actions.LOGOUT_FAILURE: return logoutFailure(state, action);
@@ -54,6 +55,10 @@ const loginFailure = (state, action) => {
 
 const loginFailureClrMsg = (state, action) => {
   return updateObject(state, { error: null });
+}
+
+const prevLogin = (state, action) => {
+  return updateObject(state, action.payload);
 }
 
 

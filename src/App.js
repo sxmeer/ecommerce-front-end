@@ -1,10 +1,19 @@
-import React from 'react';
-import './App.css';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Layout from './components/Layout/Layout';
+import { checkPrevLogin } from './store/actionsCreators';
 
-function App() {
+import './App.css';
+
+const App = props => {
+
+  useEffect(() => {
+    props.checkPreviousLogin();
+  }, [props]);
+
   return (
     <div className="App">
       <Header />
@@ -14,4 +23,10 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    checkPreviousLogin: () => dispatch(checkPrevLogin())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);

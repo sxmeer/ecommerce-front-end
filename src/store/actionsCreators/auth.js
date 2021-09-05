@@ -43,6 +43,24 @@ export const login = (email, password) => {
   };
 };
 
+export const checkPrevLogin = () => {
+  return dispatch => {
+    let userData = localStorage.getItem('auth');
+    if (!userData) {
+      dispatch(setPrevLoginData({}));
+    } else {
+      dispatch(setPrevLoginData(JSON.parse(userData)));
+    }
+  }
+}
+
+const setPrevLoginData = (data) => {
+  return {
+    type: actions.PREV_LOGIN,
+    payload: data
+  };
+};
+
 const logoutStart = () => {
   return {
     type: actions.LOGOUT_START

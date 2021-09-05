@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { logout } from '../../store/actionsCreators';
 import { USER_TYPES } from '../../config';
 import './Header.css';
 import logo from '../../assets/logo_light.svg';
@@ -32,19 +31,19 @@ const Header = props => {
 
   let linksTop = props.isAuthenticated ? <>
     <p>Hello {props.firstName}!</p>
-    <p className="links" to="/logout" onClick={props.logout}> Log-out</p>
+    <Link className="links" to="/logout" onClick={props.logout}> Log-out</Link>
   </> : <>
     <p className="links" onClick={() => { setHeaderState({ isLoginMode: true, isModalVisible: true }) }}>Log-in</p>
     <p className="links" onClick={() => { setHeaderState({ isLoginMode: false, isModalVisible: true }) }}>Sign-up</p>
   </>;
 
   let linksBottom = props.isAuthenticated ? <>
-    <Link className="links" to="/cart"><i className="fa fa-home"></i> Home</Link>
+    <Link className="links" to="/"><i className="fa fa-home"></i> Home</Link>
     <Link className="links" to="/cart"><i className="fa fa-shopping-cart"></i> My Cart</Link>
     <Link className="links" to="/orders"><i className="fa fa-list-ul"></i> My Orders</Link>
     {props.isAuthenticatedAdmin ? <>
-      <Link className="links" to="/cart"><i className="fa fa-plus-circle"></i> Create Product</Link>
-      <Link className="links" to="/cart"><i className="fa fa-list-alt"></i> All Orders</Link>
+      <Link className="links" to="/product"><i className="fa fa-plus-circle"></i> Create Product</Link>
+      <Link className="links" to="/all-orders"><i className="fa fa-list-alt"></i> All Orders</Link>
     </> : null}
   </> : null;
 
@@ -84,10 +83,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    logout: () => dispatch(logout())
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps)(Header);
