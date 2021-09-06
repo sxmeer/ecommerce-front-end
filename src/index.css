@@ -4,7 +4,7 @@
   --color-background-dark: #0f1111;
   --color-gray: #eaeded;
   --color-yellow-light: #f0c14b;
-  --color-yellow-orangish: #febd69;
+  --color-yellow-orangish: #f7ca00;
   --color-orange: #ffa41c;
   --color-cyan-blue: #007185;
   --color-brown: #b12704;
@@ -30,29 +30,55 @@ body {
 }
 
 .primary-btn {
-  padding: 0.4rem 0 0.4rem 0;
+  padding: 0.4rem;
   color: var(--color-background-dark);
   border-radius: 0.25rem;
   border: 1px solid var(--color-orange);
   background-color: var(--color-yellow-light);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .secondary-btn {
-  padding: 0.4rem 0 0.4rem 0;
+  padding: 0.4rem;
   color: var(--color-background-dark);
   border-radius: 0.25rem;
   background-color: var(--color-orange);
+  border: 1px solid var(--color-yellow-light);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .danger-btn {
-  padding: 0.4rem 0 0.4rem 0;
+  padding: 0.4rem;
   color: var(--color-background-dark);
   border-radius: 0.25rem;
   border: 1px solid var(--color-background-dark);
-  background-color: var(--color-gray);
+  background-color: v ar(--color-gray);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.ascent-btn {
+  padding: 0.4rem;
+  color: var(--color-background-dark);
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-yellow-orangish);
+  background-color: var(--color-yellow-orangish);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .sm {

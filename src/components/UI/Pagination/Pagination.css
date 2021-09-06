@@ -1,0 +1,12 @@
+.Pagination {
+  padding: 1rem 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.Pagination p {
+  color: var(--color-background-dark);
+}

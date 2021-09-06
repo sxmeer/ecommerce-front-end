@@ -1,0 +1,112 @@
+.Order {
+  max-width: 600px;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+  color: var(--color-background-dark);
+  font-weight: 400;
+}
+
+.Order .fa {
+  transition: transform 0.3s linear;
+  cursor: pointer;
+}
+.Order .fa.open {
+  transform: rotate(180deg);
+}
+
+.Order .collapsableContainer {
+  overflow: hidden;
+}
+
+.Order .collapsableContainer .lower {
+  margin-top: -100%;
+  transition: margin 0.5s linear;
+}
+
+.Order .collapsableContainer .lower.open {
+  margin-top: 0%;
+}
+
+.Order__Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Order__Header p {
+  font-weight: 700;
+  font-size: var(--font-size-md-lg);
+}
+
+.Order__subdetailOne {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.Order__optionsContainer {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.Order__options {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.Order__options select {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  opacity: 1;
+  color: var(--color-background-dark);
+}
+
+.Order__options select:disabled {
+  opacity: 1;
+  color: var(--color-background-dark);
+  background-color: #f1f1f1;
+}
+
+.Order__breakdownContainer {
+  margin-top: 0.5rem;
+}
+
+.Order__breakdownContainer > p:first-child {
+  margin-bottom: 0.3rem;
+}
+
+.Order__breakdownItem {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f1f1f1;
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+.Order__breakdownItemName {
+  flex: 1;
+}
+.Order__breakdownItemPrice {
+  color: var(--color-brown);
+}
+
+.Order__price {
+  text-align: right;
+  color: var(--color-brown);
+  margin-bottom: 0.5rem;
+}
+
+.Order__buttonContainer {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+.Order__buttonContainer button {
+  padding: 0.5rem 1rem;
+}
