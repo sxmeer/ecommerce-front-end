@@ -84,7 +84,7 @@
   font-size: var(--font-size-sm);
 }
 
-.ProductDetail__left .error {
+.ProductDetail__right .error {
   color: red;
   font-size: var(--font-size-sm);
 }

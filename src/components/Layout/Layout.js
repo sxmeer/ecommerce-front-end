@@ -18,8 +18,12 @@ const Layout = () => {
     <div className="Layout">
       <Switch>
         <Route path="/" component={Home} exact />
-        <Route path="/product/:id" mode={PRODUCT_COMPONENT_MODES.VIEW_MODE} component={ProductDetail} />
-        <AdminRoute path="/product" mode={PRODUCT_COMPONENT_MODES.CREATE_MODE} component={ProductDetail} />
+        <Route path="/product/:id"
+          render={(props) =>
+            <ProductDetail defaultMode={PRODUCT_COMPONENT_MODES.VIEW_MODE} {...props} />
+          }
+        />
+        <AdminRoute path="/product" defaultMode={PRODUCT_COMPONENT_MODES.CREATE_MODE} component={ProductDetail} />
         <PrivateRoute path="/cart" component={Cart} />
         <PrivateRoute path="/orders" component={Orders} />
         <AdminRoute path="/all-orders" isAdmin component={Orders} />

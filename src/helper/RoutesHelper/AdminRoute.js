@@ -3,20 +3,19 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import { USER_TYPES } from '../../config';
 
-const adminRoute = ({ component: Component, isAuthenticatedAdmin, ...rest }) => {
+const adminRoute = ({ component: Component, defaultMode, isAuthenticatedAdmin, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props =>
-        isAuthenticatedAdmin ?
-          <Component {...props} />
-          :
+      render={props => {
+        return isAuthenticatedAdmin ?
+          <Component {...props} defaultMode={defaultMode} /> :
           <Redirect
             to={{
               pathname: "/",
               state: { from: props.location }
-            }}
-          />
+            }} />
+      }
       }
     />
   );

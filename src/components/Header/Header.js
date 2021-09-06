@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { USER_TYPES } from '../../config';
 import './Header.css';
 import logo from '../../assets/logo_light.svg';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Authenticate from '../Authenticate/Authenticate';
 import Loader from '../UI/Loader/Loader';
 
@@ -38,12 +38,12 @@ const Header = props => {
   </>;
 
   let linksBottom = props.isAuthenticated ? <>
-    <Link className="links" to="/"><i className="fa fa-home"></i> Home</Link>
-    <Link className="links" to="/cart"><i className="fa fa-shopping-cart"></i> My Cart</Link>
-    <Link className="links" to="/orders"><i className="fa fa-list-ul"></i> My Orders</Link>
+    <NavLink exact activeClassName="active" className="links" to="/"><i className="fa fa-home"></i> Home</NavLink>
+    <NavLink activeClassName="active" className="links" to="/cart"><i className="fa fa-shopping-cart"></i> My Cart</NavLink>
+    <NavLink activeClassName="active" className="links" to="/orders"><i className="fa fa-list-ul"></i> My Orders</NavLink>
     {props.isAuthenticatedAdmin ? <>
-      <Link className="links" to="/product"><i className="fa fa-plus-circle"></i> Create Product</Link>
-      <Link className="links" to="/all-orders"><i className="fa fa-list-alt"></i> All Orders</Link>
+      <NavLink activeClassName="active" className="links" to="/product"><i className="fa fa-plus-circle"></i> Create Product</NavLink>
+      <NavLink activeClassName="active" className="links" to="/all-orders"><i className="fa fa-list-alt"></i> All Orders</NavLink>
     </> : null}
   </> : null;
 
