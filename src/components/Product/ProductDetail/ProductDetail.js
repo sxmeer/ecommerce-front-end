@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 // import { useParams } from 'react-router';
 import './ProductDetail.css';
 import { PRODUCT_COMPONENT_MODES, PRODUCT_VALIDATION, checkValidity, IMAGE_CONFIG } from '../../../config';
