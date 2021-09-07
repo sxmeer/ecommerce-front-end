@@ -72,7 +72,7 @@ const cartRemoveStart = (state, action) => {
 const cartRemoveSuccess = (state, action) => {
   let products = [...state.products];
   let { cartData, productId } = action.payload;
-  products.splice(products.findIndex(_ => _._id === productId), 1);
+  products.splice(products.findIndex(_ => _.product._id === productId), 1);
   return updateObject(state, {
     products,
     totalPrice: cartData.totalPrice,

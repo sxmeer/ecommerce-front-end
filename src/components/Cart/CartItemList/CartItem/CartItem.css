@@ -1,8 +1,7 @@
 .CartItem {
-  max-width: 600px;
   padding: 1rem;
   display: flex;
-  margin: 1rem;
+  margin: 1rem 0rem;
   background-color: white;
   border-radius: 0.5rem;
   color: var(--color-background-dark);

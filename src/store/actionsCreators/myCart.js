@@ -106,7 +106,7 @@ export const fetchCart = () => {
   return (dispatch, getState) => {
     dispatch(cartFetchStart());
     let { _id: userId, token } = getState().auth;
-    axios.put("/cart/remove", null, {
+    axios.get("/cart", {
       params: new URLSearchParams([["userId", userId]]),
       headers: {
         "Authorization": `Bearer ${token}`
