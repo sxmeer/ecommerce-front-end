@@ -42,7 +42,7 @@ const Header = props => {
     <NavLink activeClassName="active" className="links" to="/cart"><i className="fa fa-shopping-cart"></i> My Cart</NavLink>
     <NavLink activeClassName="active" className="links" to="/orders"><i className="fa fa-list-ul"></i> My Orders</NavLink>
     {props.isAuthenticatedAdmin ? <>
-      <NavLink activeClassName="active" className="links" to="/product"><i className="fa fa-plus-circle"></i> Create Product</NavLink>
+      <NavLink activeClassName="active" exact className="links" to="/product"><i className="fa fa-plus-circle"></i> Create Product</NavLink>
       <NavLink activeClassName="active" className="links" to="/all-orders"><i className="fa fa-list-alt"></i> All Orders</NavLink>
     </> : null}
   </> : null;

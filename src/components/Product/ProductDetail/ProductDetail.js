@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import axios from '../../../axios-config';
@@ -8,11 +8,26 @@ import './ProductDetail.css';
 import Loader from '../../UI/Loader/Loader';
 import AlertMessage from '../../UI/AlertMessage/AlertMessage';
 import ConfirmMessage from '../../UI/ConfirmMessage/ConfirmMessage';
+import { initialAlertConfig } from '../../Home/Home';
+import { addToCart, clearAddToCartMessage } from '../../../store/actionsCreators';
 
 //user can reach here by clicking the product
 //checks to be present for authenticated user to add in the cart, admin to edit the product
 //create product mode for admin
-const ProductDetail = ({ defaultMode, isLoggedInAdmin, isLoggedIn, userId, token, history }) => {
+const ProductDetail = ({
+  defaultMode,
+  isLoggedInAdmin,
+  isLoggedIn,
+  userId,
+  token,
+  history,
+  addToCart,
+  isAddingToCart,
+  addToCartMessage,
+  clearAddToCartMessage,
+}) => {
+  const ref = useRef(null);
+  const [alertMessageConfig, setAlertMessageConfig] = useState(initialAlertConfig);
   const { id } = useParams();
   const [productDelete, setProductDelete] = useState({
     showDeleteDialog: false,
@@ -39,6 +54,36 @@ const ProductDetail = ({ defaultMode, isLoggedInAdmin, isLoggedIn, userId, token
     },
     error: null
   });
+
+  const addToCartHandler = () => {
+    if (!isLoggedIn) {
+      setAlertMessageConfig({
+        show: true,
+        message: "Please login to continue",
+        onPositiveBtnClick: () => {
+          setAlertMessageConfig(initialAlertConfig)
+        },
+        positiveBtn: "OK"
+      })
+    } else {
+      addToCart(id, parseInt(ref.current.value));
+    }
+  }
+
+  useEffect(() => {
+    if (addToCartMessage) {
+      setAlertMessageConfig({
+        show: true,
+        message: addToCartMessage,
+        onPositiveBtnClick: () => {
+          setAlertMessageConfig(initialAlertConfig);
+          clearAddToCartMessage();
+        },
+        positiveBtn: "OK"
+      })
+    }
+    // eslint-disable-next-line
+  }, [addToCartMessage]);
 
   const fetchProduct = useCallback(() => {
     setLoaderVisible(true);
@@ -226,7 +271,7 @@ const ProductDetail = ({ defaultMode, isLoggedInAdmin, isLoggedIn, userId, token
           Delete</button>);
         buttons.push(<button className="secondary-btn" onClick={() => setMode(PRODUCT_COMPONENT_MODES.EDIT_MODE)}>Edit</button>);
       }
-      buttons.push(<button className="primary-btn" onClick={() => { }}>Add to cart</button>);
+      buttons.push(<button className="primary-btn" onClick={addToCartHandler}>Add to cart</button>);
       break;
     default:
       break;
@@ -234,7 +279,8 @@ const ProductDetail = ({ defaultMode, isLoggedInAdmin, isLoggedIn, userId, token
 
   return (
     <div className="ProductDetail">
-      <Loader show={isLoaderVisible} />
+      <Loader show={isLoaderVisible || isAddingToCart} />
+      {alertMessageConfig.show && <AlertMessage {...alertMessageConfig} />}
       {productDelete.isDeleted && <AlertMessage
         show
         message="The product has been deleted"
@@ -328,6 +374,18 @@ const ProductDetail = ({ defaultMode, isLoggedInAdmin, isLoggedIn, userId, token
               Please enter integer number
             </p>
           </div>
+          {mode === PRODUCT_COMPONENT_MODES.VIEW_MODE &&
+            <div>
+              <span className="Product__sm" style={{ marginRight: '0.5rem' }}>Quantity</span>
+              <select ref={ref} className="Product__quantity" name="" id="">
+                <option value="1" defaultChecked >1</option>
+                <option value="2" >2</option>
+                <option value="3" >3</option>
+                <option value="4" >4</option>
+                <option value="5" >5</option>
+              </select>
+            </div>
+          }
         </div >
 
         {mode !== PRODUCT_COMPONENT_MODES.VIEW_MODE &&
@@ -356,8 +414,17 @@ const mapStateToProps = state => {
     isLoggedInAdmin: state.auth.token !== null && state.auth.role !== null && state.auth.role === USER_TYPES.TYPE_ADMIN,
     isLoggedIn: state.auth.token !== null,
     token: state.auth.token,
-    userId: state.auth._id
+    userId: state.auth._id,
+    addToCartMessage: state.myCart.addToCartMessage,
+    isAddingToCart: state.myCart.isAddingToCart
   }
 };
 
-export default withRouter(connect(mapStateToProps)(ProductDetail));
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: (productId, productCount) => dispatch(addToCart(productId, productCount)),
+    clearAddToCartMessage: () => dispatch(clearAddToCartMessage())
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProductDetail));
