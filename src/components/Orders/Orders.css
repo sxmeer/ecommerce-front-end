@@ -1,0 +1,74 @@
+.Orders__container {
+  margin: auto;
+  max-width: 1020px;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+}
+.Orders__title {
+  margin: 1rem;
+  text-align: center;
+  font-size: var(--font-size-md-lg);
+}
+
+.Orders__noOrders {
+  font-size: var(--font-size-md);
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.Orders__paginationContainer {
+  margin-top: auto;
+}
+
+.Orders_searchContainer {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.Orders_searchContainer_select {
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.Orders_searchContainer_select > * {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.Orders_searchContainer_select .searchBtn {
+  margin-left: auto;
+  padding: 0.5rem 2rem;
+  border-radius: 5rem;
+}
+
+.Orders_searchContainer select {
+  padding: 0.5rem;
+  margin-right: 1rem;
+  font-size: var(--font-size-sm);
+  border-radius: 0.5rem;
+  opacity: 1;
+  color: var(--color-background-dark);
+}
+
+.Orders_searchContainer input {
+  width: 100%;
+  font-size: var(--font-size-sm);
+  outline: none;
+  border: 1px solid var(--color-background-dark);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.Orders_searchContainer input:focus {
+  border: 1px solid var(--color-orange);
+  box-shadow: 0 0 3px 2px var(--color-yellow-light);
+}

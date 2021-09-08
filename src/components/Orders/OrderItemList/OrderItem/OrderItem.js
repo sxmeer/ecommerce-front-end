@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import './Order.css';
-import { ORDER_STATUS, PAYMENT_STATUS, PAYMENT_METHOD } from '../../../config';
+import { ORDER_STATUS, PAYMENT_STATUS, PAYMENT_METHOD } from '../../../../config';
 
-const Order = ({ order, isAdmin }) => {
+import './OrderItem.css';
+
+const Order = React.memo(({ order, isAdmin }) => {
   const [isOpen, setOpen] = useState(false);
   const [isEditMode, setEditMode] = useState(false);
   return (
@@ -64,6 +65,6 @@ const Order = ({ order, isAdmin }) => {
       }
     </div >
   );
-};
+});
 
 export default Order;

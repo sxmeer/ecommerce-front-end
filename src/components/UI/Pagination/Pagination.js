@@ -46,7 +46,7 @@ const Pagination = ({ currentPage, totalPage, updateFn }) => {
 
 
   for (let index = startPage; index <= endPage; index++) {
-    pagingationElements.push(<button className={index === currentPage ? 'secondary-btn sm' : 'danger-btn sm'} onClick={() => updateFn(index)} > {index}</button >);
+    pagingationElements.push(<button className={index === currentPage ? 'secondary-btn sm' : 'danger-btn sm'} onClick={() => { if (index !== currentPage) { updateFn(index) } }} > {index}</button >);
   }
 
   if (endPage + 1 <= totalPage) {

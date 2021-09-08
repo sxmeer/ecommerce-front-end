@@ -40,8 +40,7 @@ const Cart = props => {
   }
 
   const onOrderClickHandler = () => {
-    console.log(props);
-    axios.put("order/create", { address: checkoutFormState.address.value }, {
+    axios.put("order/create", { address: checkoutFormState.address.value.trim() }, {
       params: new URLSearchParams([["userId", props.userId]]),
       headers: {
         'Authorization': `Bearer ${props.token}`
@@ -141,7 +140,7 @@ const Cart = props => {
     <Loader show={props.isLoading || props.isRemovingFromCart} />
     {alertConfig.show && <AlertMessage {...alertConfig} />}
     <div className="Cart__container">
-      <p className="cartTitle">My Cart</p>
+      {/* <p className="cartTitle">My Cart</p> */}
       <div className="Cart_division">
         <div className="cartItemList">
           <CartItemList cartItems={props.cartItems} removeFromCart={props.removeFromCart} />

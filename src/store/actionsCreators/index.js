@@ -17,3 +17,9 @@ export {
   clearRemoveFromCartMessage,
   clearAddToCartMessage
 } from './myCart';
+
+export {
+  fetchOrders,
+  orderEmpty,
+  setOrderFilter
+} from './myOrders';

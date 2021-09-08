@@ -1,7 +1,7 @@
 .Order {
-  max-width: 600px;
+  width: 80%;
   padding: 1rem;
-  margin: 1rem;
+  margin: 1rem auto;
   background-color: white;
   border: 1px solid gray;
   border-radius: 0.5rem;
