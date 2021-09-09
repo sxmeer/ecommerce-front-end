@@ -8,7 +8,6 @@ import Home from '../Home/Home';
 import Cart from '../Cart/Cart';
 import Orders from '../Orders/Orders';
 import ProductDetail from '../Product/ProductDetail/ProductDetail';
-import Logout from '../Logout/Logout';
 import './Layout.css';
 
 import { PRODUCT_COMPONENT_MODES } from '../../config';
@@ -28,7 +27,6 @@ const Layout = () => {
         <PrivateRoute path="/cart" component={Cart} />
         <PrivateRoute path="/orders" component={Orders} />
         <AdminRoute path="/all-orders" component={AllOrders} />
-        <PrivateRoute path="/logout" component={Logout} />
         <Redirect to="/" />
       </Switch>
     </div>

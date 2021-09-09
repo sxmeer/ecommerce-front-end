@@ -144,13 +144,13 @@ const Authenticate = React.memo((props) => {
     <Modal
       show={true}
       closeModal={props.onClose}>
+      {signUpState.isAccountCreated && <AlertMessage
+        show
+        message="Your account has been created. Please login to continue."
+        positiveBtn="OK"
+        onPositiveBtnClick={props.onClose} />}
       <div className="Authenticate">
         <img src={logo} alt="" className="Authenticate__img" />
-        {signUpState.isAccountCreated && <AlertMessage
-          show
-          message="Your account has been created. Please login to continue."
-          positiveBtn="OK"
-          onPositiveBtnClick={props.onClose} />}
         {/* login section */}
         <div className={`Authenticate__logIn ${isLoginMode ? 'mode' : ''}`}>
           <div>

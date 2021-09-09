@@ -26,6 +26,7 @@ const reducer = (state = initialState, action) => {
     case actions.CART_REMOVE_SUCCESS: return cartRemoveSuccess(state, action);
     case actions.CART_REMOVE_FAILURE: return cartRemoveFailure(state, action);
     case actions.CART_REMOVE_CLEAR_MESSAGE: return cartRemoveClearMessage(state, action);
+    case actions.DEFAULT_CART: return defaultCart(state, action);
     default:
       return state;
   }
@@ -93,5 +94,9 @@ const cartRemoveClearMessage = (state, action) => {
     removingFromCartMessage: null
   });
 };
+
+const defaultCart = (state, action) => {
+  return initialState;
+}
 
 export default reducer;

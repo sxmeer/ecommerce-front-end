@@ -43,3 +43,9 @@ export const fetchProductListing = (requestedPage) => {
     });
   }
 }
+
+export const defaultProducts = () => {
+  return {
+    type: actions.DEFAULT_PRODUCT
+  };
+};

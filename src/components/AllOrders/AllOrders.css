@@ -1,4 +1,4 @@
-.MyOrders__container {
+.AllOrders__container {
   margin: auto;
   max-width: 1020px;
   min-height: 100vh;
@@ -6,24 +6,24 @@
   align-items: stretch;
   flex-direction: column;
 }
-.MyOrders__title {
+.AllOrders__title {
   margin: 1rem;
   text-align: center;
   font-size: var(--font-size-md-lg);
 }
 
-.MyOrders__noOrders {
+.AllOrders__noOrders {
   font-size: var(--font-size-md);
   text-align: center;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.MyOrders__paginationContainer {
+.AllOrders__paginationContainer {
   margin-top: auto;
 }
 
-.MyOrders_searchContainer {
+.AllOrders_searchContainer {
   width: 80%;
   margin: 0 auto;
   margin-top: 2rem;
@@ -32,25 +32,32 @@
   align-items: stretch;
 }
 
-.MyOrders_searchContainer_select {
+.AllOrders__pageCountContainer {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.AllOrders_searchContainer_select {
   display: flex;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.MyOrders_searchContainer_select > * {
+.AllOrders_searchContainer_select > * {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
-.MyOrders_searchContainer_select .searchBtn {
+.AllOrders_searchContainer_select .searchBtn {
   margin-left: auto;
   padding: 0.5rem 2rem;
   border-radius: 5rem;
 }
 
-.MyOrders_searchContainer select {
+.AllOrders_searchContainer select {
   padding: 0.5rem;
   margin-right: 1rem;
   font-size: var(--font-size-sm);
@@ -59,7 +66,7 @@
   color: var(--color-background-dark);
 }
 
-.MyOrders_searchContainer input {
+.AllOrders_searchContainer input {
   width: 100%;
   font-size: var(--font-size-sm);
   outline: none;
@@ -68,7 +75,7 @@
   border-radius: 0.5rem;
 }
 
-.MyOrders_searchContainer input:focus {
+.AllOrders_searchContainer input:focus {
   border: 1px solid var(--color-orange);
   box-shadow: 0 0 3px 2px var(--color-yellow-light);
 }

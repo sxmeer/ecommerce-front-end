@@ -21,6 +21,7 @@ const reducer = (state = initialState, action) => {
     case actions.ORDER_LISTING_FAILURE: return orderListingFailure(state, action);
     case actions.ORDER_LISTING_EMPTY: return orderListingEmpty(state, action);
     case actions.ORDER_SET_FILTER: return setOrderFilter(state, action);
+    case actions.DEFAULT_ORDER: return defaultOrder(state, action);
     default:
       return state;
   }
@@ -51,6 +52,10 @@ const orderListingEmpty = (state, action) => {
 
 const setOrderFilter = (state, action) => {
   return updateObject(state, { ...action.payload });
+}
+
+const defaultOrder = (state, action) => {
+  return initialState;
 }
 
 export default reducer;

@@ -1,7 +1,6 @@
 import * as actions from '../actionsCreators/actions';
 import { updateObject } from '../../helper/Utils/utility';
 
-
 const initialState = {
   page: 1,
   limit: 8,
@@ -10,7 +9,7 @@ const initialState = {
   totalProducts: 0,
   error: null,
   isLoading: false,
-}
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -18,6 +17,7 @@ const reducer = (state = initialState, action) => {
     case actions.PRODUCT_LISTING_SUCCESS: return productListingSuccess(state, action);
     case actions.PRODUCT_LISTING_FAILURE: return productListingFailure(state, action);
     case actions.PRODUCT_LISTING_EMPTY: return productListingEmpty(state, action);
+    case actions.DEFAULT_PRODUCT: return defaultProducts(state, action);
     default:
       return state;
   }
@@ -58,6 +58,10 @@ const productListingEmpty = (state, action) => {
     error: null,
     isLoading: false,
   });
+};
+
+const defaultProducts = (state, action) => {
+  return initialState;
 };
 
 

@@ -1,51 +1,81 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { ORDER_STATUS, PAYMENT_STATUS } from '../../config';
-import { fetchAllOrders, allOrderEmpty, setAllOrderFilter } from '../../store/actionsCreators';
+import { fetchAllOrders, allOrderEmpty, setAllOrderFilter, editOrder } from '../../store/actionsCreators';
 import Loader from '../UI/Loader/Loader';
 import Pagination from '../UI/Pagination/Pagination';
 import OrderItemList from '../Orders/OrderItemList/OrderItemList';
+import axios from '../../axios-config';
 
 import './AllOrders.css';
 
-const AllOrders = props => {
+const AllOrders = ({ orderId,
+  paymentStatus,
+  orderStatus,
+  page,
+  limit,
+  count,
+  orders,
+  totalOrders,
+  error,
+  isLoading,
+  token,
+  userId,
+  emptyOrders,
+  fetchOrders,
+  setOrderFilter,
+  updateOrder }) => {
   const [searchParams, setSearchParams] = useState({
-    orderId: props.orderId,
-    orderStatus: props.orderStatus,
-    paymentStatus: props.paymentStatus
+    orderId: orderId,
+    orderStatus: orderStatus,
+    paymentStatus: paymentStatus
   });
 
   useEffect(() => {
-    props.fetchOrders();
+    fetchOrders();
     return () => {
-      props.emptyOrders();
+      emptyOrders();
     }
     //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    if (props.orders.length > 0) {
+    if (orders.length > 0) {
       window.scrollTo(0, 0);
     }
-  }, [props.orders]);
+  }, [orders]);
 
   const searchFilteredItems = () => {
-    props.setOrderFilter(searchParams)
-    props.fetchOrders(1);
+    setOrderFilter(searchParams)
+    fetchOrders(1);
   };
+
+  const editOrder = useCallback((orderId, editConfig) => {
+    axios.patch("order/edit", editConfig, {
+      params: new URLSearchParams([["userId", userId], ["orderId", orderId]]),
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(response => {
+      updateOrder(response.data);
+    }).catch(_ => {
+      console.dir(_);
+    });
+  }, [userId, token, updateOrder]);
+
   return (
-    <div className="MyOrders">
-      <div className="MyOrders__container">
-        <Loader show={props.isLoading} />
-        <div className="MyOrders_searchContainer">
-          <div className="MyOrders_searchContainer_input">
+    <div className="AllOrders">
+      <div className="AllOrders__container">
+        <Loader show={isLoading} />
+        <div className="AllOrders_searchContainer">
+          <div className="AllOrders_searchContainer_input">
             <input
               onChange={(event) => setSearchParams({ ...searchParams, orderId: event.target.value.trim() })}
               type="text"
               value={searchParams.orderId}
               placeholder="Enter Order Id" />
           </div>
-          <div className="MyOrders_searchContainer_select">
+          <div className="AllOrders_searchContainer_select">
             <div>
               <p>Order Status:</p>
               <select
@@ -75,21 +105,27 @@ const AllOrders = props => {
             </button>
           </div>
         </div>
-        <div className="MyOrders_ordersListing">
-          {!props.isLoading && props.orders.length === 0 &&
-            <p className="MyOrders__noOrders">No Orders 👻 </p>}
-          <OrderItemList isAdmin orders={props.orders} />
+        <div className="AllOrders_ordersListing">
+          {!isLoading && orders.length === 0 &&
+            <p className="AllOrders__noOrders">No Orders 👻 </p>}
+          {!isLoading && orders.length > 0 &&
+            <div className="AllOrders__pageCountContainer">
+              <p>Total {totalOrders} {totalOrders > 1 ? 'Orders' : 'Order'}</p>
+              <p>page {page} of {parseInt(Math.ceil(totalOrders / limit))}</p>
+            </div>
+          }
+          <OrderItemList isAdmin orders={orders} editOrder={editOrder} />
         </div>
-        <div className="MyOrders__paginationContainer">
-          {!props.isLoading && props.orders.length > 0 &&
+        <div className="AllOrders__paginationContainer">
+          {!isLoading && orders.length > 0 &&
             <Pagination
-              totalPage={parseInt(Math.ceil(props.totalOrders / props.limit))}
-              currentPage={props.page}
-              updateFn={props.fetchOrders} />
+              totalPage={parseInt(Math.ceil(totalOrders / limit))}
+              currentPage={page}
+              updateFn={fetchOrders} />
           }
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
@@ -105,6 +141,8 @@ const mapStateToProps = (state) => {
     totalOrders: state.allOrders.totalOrders,
     error: state.allOrders.error,
     isLoading: state.allOrders.isLoading,
+    token: state.auth.token,
+    userId: state.auth._id
   };
 };
 
@@ -112,7 +150,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     emptyOrders: () => dispatch(allOrderEmpty()),
     fetchOrders: (requestedPage) => dispatch(fetchAllOrders(requestedPage)),
-    setOrderFilter: (filterObj) => dispatch(setAllOrderFilter(filterObj))
+    setOrderFilter: (filterObj) => dispatch(setAllOrderFilter(filterObj)),
+    updateOrder: (order) => dispatch(editOrder(order))
   }
 }
 

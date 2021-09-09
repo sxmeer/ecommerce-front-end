@@ -61,3 +61,9 @@ export const fetchOrders = (requestedPage) => {
     });
   };
 };
+
+export const defaultMyOrder = () => {
+  return {
+    type: actions.DEFAULT_ORDER,
+  };
+};

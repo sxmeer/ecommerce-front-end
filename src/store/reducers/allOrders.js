@@ -22,6 +22,8 @@ const reducer = (state = initialState, action) => {
     case actions.ALL_ORDER_LISTING_FAILURE: return allOrderListingFailure(state, action);
     case actions.ALL_ORDER_LISTING_EMPTY: return allOrderListingEmpty(state, action);
     case actions.ALL_ORDER_SET_FILTER: return setAllOrderFilter(state, action);
+    case actions.ALL_ORDER_EDIT: return allOrderEdit(state, action);
+    case actions.DEFAULT_ALL_ORDER: return defaultAllOrder(state, action);
     default:
       return state;
   }
@@ -52,6 +54,17 @@ const allOrderListingEmpty = (state, action) => {
 
 const setAllOrderFilter = (state, action) => {
   return updateObject(state, { ...action.payload });
+}
+
+const allOrderEdit = (state, action) => {
+  let index = state.orders.findIndex(_ => _._id === action.payload._id);
+  let orders = [...state.orders];
+  orders[index] = action.payload;
+  return updateObject(state, { orders });
+};
+
+const defaultAllOrder = (state, action) => {
+  return initialState;
 }
 
 export default reducer;

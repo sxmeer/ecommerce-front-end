@@ -38,6 +38,10 @@
   transition: color 0.3s;
 }
 
+.Header .name {
+  color: var(--color-orange);
+}
+
 .Header .links.active {
   color: var(--color-orange);
 }

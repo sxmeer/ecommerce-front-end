@@ -62,3 +62,16 @@ export const fetchAllOrders = (requestedPage) => {
     });
   };
 };
+
+export const editOrder = (order) => {
+  return {
+    type: actions.ALL_ORDER_EDIT,
+    payload: order
+  };
+};
+
+export const defaultAllOrder = () => {
+  return {
+    type: actions.DEFAULT_ALL_ORDER
+  };
+};
