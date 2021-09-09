@@ -23,3 +23,9 @@ export {
   orderEmpty,
   setOrderFilter
 } from './myOrders';
+
+export {
+  fetchAllOrders,
+  allOrderEmpty,
+  setAllOrderFilter
+} from './allOrders';

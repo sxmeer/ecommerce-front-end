@@ -12,6 +12,7 @@ import Logout from '../Logout/Logout';
 import './Layout.css';
 
 import { PRODUCT_COMPONENT_MODES } from '../../config';
+import AllOrders from '../AllOrders/AllOrders';
 
 const Layout = () => {
   return (
@@ -26,7 +27,7 @@ const Layout = () => {
         <AdminRoute path="/product" defaultMode={PRODUCT_COMPONENT_MODES.CREATE_MODE} component={ProductDetail} />
         <PrivateRoute path="/cart" component={Cart} />
         <PrivateRoute path="/orders" component={Orders} />
-        <AdminRoute path="/all-orders" isAdmin component={Orders} />
+        <AdminRoute path="/all-orders" component={AllOrders} />
         <PrivateRoute path="/logout" component={Logout} />
         <Redirect to="/" />
       </Switch>

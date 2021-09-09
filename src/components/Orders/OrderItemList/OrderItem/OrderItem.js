@@ -16,7 +16,7 @@ const Order = React.memo(({ order, isAdmin }) => {
         </div>
         <div className="Order__subdetailOne">
           {order.transactionId && <p>Transaction Id: {"aeaigneiangiaeg"}</p>}
-          <p>User: {order.user.email}</p>
+          {isAdmin && <p>User: {order.user.email}</p>}
           <p>Address: {order.address}</p>
           <p>Payment Method: {PAYMENT_METHOD[order.paymentMethod]}</p>
         </div>
