@@ -1,12 +1,16 @@
 .Order {
-  max-width: 600px;
+  width: 80%;
   padding: 1rem;
-  margin: 1rem;
+  margin: 1rem auto;
   background-color: white;
   border: 1px solid gray;
   border-radius: 0.5rem;
   color: var(--color-background-dark);
   font-weight: 400;
+}
+
+.Order span.value {
+  font-weight: 700;
 }
 
 .Order .fa {
@@ -35,8 +39,8 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .Order__Header p {
-  font-weight: 700;
   font-size: var(--font-size-md-lg);
 }
 

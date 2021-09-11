@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { USER_TYPES } from '../../config';
 import './Header.css';
 import logo from '../../assets/logo_light.svg';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Authenticate from '../Authenticate/Authenticate';
 import Loader from '../UI/Loader/Loader';
+import { logout } from '../../store/actionsCreators';
 
 const Header = props => {
   const [headerState, setHeaderState] = useState({
@@ -30,8 +31,8 @@ const Header = props => {
   }, [props.token, closeModal]);
 
   let linksTop = props.isAuthenticated ? <>
-    <p>Hello {props.firstName}!</p>
-    <Link className="links" to="/logout" onClick={props.logout}> Log-out</Link>
+    <p>Hello <span className="name">{props.firstName}</span></p>
+    <p className="links" onClick={props.logout}> Log-out</p>
   </> : <>
     <p className="links" onClick={() => { setHeaderState({ isLoginMode: true, isModalVisible: true }) }}>Log-in</p>
     <p className="links" onClick={() => { setHeaderState({ isLoginMode: false, isModalVisible: true }) }}>Sign-up</p>
@@ -83,4 +84,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => { dispatch(logout()) }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

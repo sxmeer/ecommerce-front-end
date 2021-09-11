@@ -136,3 +136,9 @@ export const cartDefault = () => {
     type: actions.CART_DEFAULT
   };
 };
+
+export const defaultCart = () => {
+  return {
+    type: actions.DEFAULT_CART
+  };
+};

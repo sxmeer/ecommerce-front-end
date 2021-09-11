@@ -1,5 +1,6 @@
 import * as actions from './actions';
 import axios from '../../axios-config';
+import { defaultAllOrder, defaultCart, defaultMyOrder } from '.';
 
 const clearError = () => {
   return {
@@ -91,8 +92,18 @@ export const logout = () => {
     })
       .then(response => {
         dispatch(logoutSuccess());
+        dispatch(defaultAuth());
+        dispatch(defaultAllOrder());
+        dispatch(defaultMyOrder());
+        dispatch(defaultCart());
       }).catch(error => {
         dispatch(logoutFailure());
       });
+  };
+};
+
+export const defaultAuth = () => {
+  return {
+    type: actions.DEFAULT_AUTH
   };
 };

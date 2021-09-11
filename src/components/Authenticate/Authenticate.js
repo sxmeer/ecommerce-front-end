@@ -141,84 +141,86 @@ const Authenticate = React.memo((props) => {
   };
 
   return (
-    <Modal
-      show={true}
-      closeModal={props.onClose}>
-      <div className="Authenticate">
-        <img src={logo} alt="" className="Authenticate__img" />
-        {signUpState.isAccountCreated && <AlertMessage
-          show
-          message="Your account has been created. Please login to continue."
-          positiveBtn="OK"
-          onPositiveBtnClick={props.onClose} />}
-        {/* login section */}
-        <div className={`Authenticate__logIn ${isLoginMode ? 'mode' : ''}`}>
-          <div>
-            <p className="Authenticate__header">Log-In</p>
-            {Object.keys(LOGIN_CONFIG).map(config =>
+    <>
+      <Modal
+        show={true}
+        closeModal={props.onClose}>
+        <div className="Authenticate">
+          <img src={logo} alt="" className="Authenticate__img" />
+          {/* login section */}
+          <div className={`Authenticate__logIn ${isLoginMode ? 'mode' : ''}`}>
+            <div>
+              <p className="Authenticate__header">Log-In</p>
+              {Object.keys(LOGIN_CONFIG).map(config =>
+              (<div key={config} className="form__input">
+                <label htmlFor={config}>{LOGIN_CONFIG[config].label}</label>
+                <input
+                  id={config}
+                  {...LOGIN_CONFIG[config].props}
+                  value={loginState.fields[config].value}
+                  onChange={loginInputHandler} />
+              </div>)
+              )}
+              <div className="form__input">
+                <input
+                  type="submit"
+                  value="Continue"
+                  onClick={logIn}
+                  className='primary-btn' />
+              </div>
+              <p className="error">
+                {props.error}
+              </p>
+            </div>
+            <div>
+              <div className="newToAmazon">
+                <div className="horizontalLine" />
+                <p>New to Amazon?</p>
+                <div className="horizontalLine" />
+              </div>
+              <button className="danger-btn changeMode" onClick={() => changeMode(false)}>Create your Amazon account</button>
+            </div>
+          </div>
+
+          {/* signup-section */}
+          <div className={`Authenticate__signUp ${!isLoginMode ? 'mode' : ''}`}>
+            <p className="Authenticate__header">Create Account</p>
+            {Object.keys(SIGNUP_CONFIG).map(config =>
             (<div key={config} className="form__input">
-              <label htmlFor={config}>{LOGIN_CONFIG[config].label}</label>
+              <label htmlFor={config}>{SIGNUP_CONFIG[config].label}</label>
               <input
                 id={config}
-                {...LOGIN_CONFIG[config].props}
-                value={loginState.fields[config].value}
-                onChange={loginInputHandler} />
+                {...SIGNUP_CONFIG[config].props}
+                value={signUpState.fields[config].value}
+                onChange={signupInputHandler} />
             </div>)
             )}
             <div className="form__input">
               <input
                 type="submit"
-                value="Continue"
-                onClick={logIn}
+                value="Create"
+                onClick={signUp}
                 className='primary-btn' />
             </div>
             <p className="error">
-              {props.error}
+              {signUpState.error}
             </p>
-          </div>
-          <div>
             <div className="newToAmazon">
               <div className="horizontalLine" />
-              <p>New to Amazon?</p>
+              <p>Already have an account?</p>
               <div className="horizontalLine" />
             </div>
-            <button className="danger-btn changeMode" onClick={() => changeMode(false)}>Create your Amazon account</button>
+            <button className="danger-btn changeMode" onClick={() => changeMode(true)}>Log-In</button>
           </div>
-        </div>
 
-        {/* signup-section */}
-        <div className={`Authenticate__signUp ${!isLoginMode ? 'mode' : ''}`}>
-          <p className="Authenticate__header">Create Account</p>
-          {Object.keys(SIGNUP_CONFIG).map(config =>
-          (<div key={config} className="form__input">
-            <label htmlFor={config}>{SIGNUP_CONFIG[config].label}</label>
-            <input
-              id={config}
-              {...SIGNUP_CONFIG[config].props}
-              value={signUpState.fields[config].value}
-              onChange={signupInputHandler} />
-          </div>)
-          )}
-          <div className="form__input">
-            <input
-              type="submit"
-              value="Create"
-              onClick={signUp}
-              className='primary-btn' />
-          </div>
-          <p className="error">
-            {signUpState.error}
-          </p>
-          <div className="newToAmazon">
-            <div className="horizontalLine" />
-            <p>Already have an account?</p>
-            <div className="horizontalLine" />
-          </div>
-          <button className="danger-btn changeMode" onClick={() => changeMode(true)}>Log-In</button>
         </div>
-
-      </div>
-    </Modal>
+      </Modal>
+      {signUpState.isAccountCreated && <AlertMessage
+        show
+        message="Your account has been created. Please login to continue."
+        positiveBtn="OK"
+        onPositiveBtnClick={props.onClose} />}
+    </>
   )
 });
 

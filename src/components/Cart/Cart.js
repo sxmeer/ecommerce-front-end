@@ -22,6 +22,54 @@ const Cart = props => {
     proceedOrder: false
   });
 
+  const displayRazorpay = () => {
+    axios.get('payment/order/details', {
+      params: new URLSearchParams([["userId", props.userId]]),
+      headers: {
+        'Authorization': `Bearer ${props.token}`
+      }
+    }).then(response => {
+      let data = response.data;
+      console.log("on fetching order detail ", data);
+      const options = {
+        key: process.env.RAZORPAY_KEY_ID,
+        currency: data.currency,
+        amount: data.amount.toString(),
+        order_id: data.orderId,
+        handler: function (response) {
+          console.log("on order placed ", response);
+          setAlertConfig({
+            show: true,
+            message: "Your order was placed successfully",
+            onPositiveBtnClick: () => {
+              props.history.replace({ pathname: '/' });
+            },
+            positiveBtn: "OK"
+          });
+        },
+        prefill: {
+          name: props.name,
+          email: props.email,
+        },
+        notes: {
+          userId: props.userId,
+          address: checkoutFormState.address.value.trim()
+        }
+      }
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open()
+    }).catch(error => {
+      setAlertConfig({
+        show: true,
+        message: error.response.data.message,
+        onPositiveBtnClick: () => {
+          setAlertConfig(initialAlertConfig);
+        },
+        positiveBtn: "OK"
+      });
+    });
+  }
+
   const radioHandler = (event) => {
     setCheckoutFormState((prevState) => ({ ...prevState, paymentMethod: event.target.value }));
   };
@@ -40,31 +88,36 @@ const Cart = props => {
   }
 
   const onOrderClickHandler = () => {
-    console.log(props);
-    axios.put("order/create", { address: checkoutFormState.address.value }, {
-      params: new URLSearchParams([["userId", props.userId]]),
-      headers: {
-        'Authorization': `Bearer ${props.token}`
-      }
-    }).then(response => {
-      setAlertConfig({
-        show: true,
-        message: "Your order was placed successfully",
-        onPositiveBtnClick: () => {
-          props.history.replace({ pathname: '/' });
-        },
-        positiveBtn: "OK"
+    console.log(checkoutFormState);
+    console.log("payment method ", checkoutFormState.paymentMethod);
+    if (checkoutFormState.paymentMethod === "METHOD_COD") {
+      axios.put("order/create", { address: checkoutFormState.address.value.trim() }, {
+        params: new URLSearchParams([["userId", props.userId]]),
+        headers: {
+          'Authorization': `Bearer ${props.token}`
+        }
+      }).then(response => {
+        setAlertConfig({
+          show: true,
+          message: "Your order was placed successfully",
+          onPositiveBtnClick: () => {
+            props.history.replace({ pathname: '/' });
+          },
+          positiveBtn: "OK"
+        });
+      }).catch(error => {
+        setAlertConfig({
+          show: true,
+          message: error.response.data.message,
+          onPositiveBtnClick: () => {
+            setAlertConfig(initialAlertConfig);
+          },
+          positiveBtn: "OK"
+        });
       });
-    }).catch(error => {
-      setAlertConfig({
-        show: true,
-        message: error.response.data.message,
-        onPositiveBtnClick: () => {
-          setAlertConfig(initialAlertConfig);
-        },
-        positiveBtn: "OK"
-      });
-    });
+    } else if (checkoutFormState.paymentMethod === "METHOD_ONLINE_PAYMENT") {
+      displayRazorpay();
+    }
   }
 
   useEffect(() => {
@@ -141,7 +194,7 @@ const Cart = props => {
     <Loader show={props.isLoading || props.isRemovingFromCart} />
     {alertConfig.show && <AlertMessage {...alertConfig} />}
     <div className="Cart__container">
-      <p className="cartTitle">My Cart</p>
+      {/* <p className="cartTitle">My Cart</p> */}
       <div className="Cart_division">
         <div className="cartItemList">
           <CartItemList cartItems={props.cartItems} removeFromCart={props.removeFromCart} />
@@ -173,7 +226,9 @@ const mapStateToProps = state => {
     isRemovingFromCart: state.myCart.isRemovingFromCart,
     removingFromCartMessage: state.myCart.removingFromCartMessage,
     token: state.auth.token,
-    userId: state.auth._id
+    userId: state.auth._id,
+    email: state.auth.email,
+    name: `${state.auth.firstName} ${state.auth.lastName}`
   };
 };
 

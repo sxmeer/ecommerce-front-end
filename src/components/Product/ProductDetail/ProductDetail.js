@@ -359,7 +359,7 @@ const ProductDetail = ({
               className={mode !== PRODUCT_COMPONENT_MODES.VIEW_MODE ? 'edit' : ''}
               htmlFor="price">Product price:
             </label>
-            <p>₹
+            <p className="lg">₹&nbsp;
               <input
                 placeholder=""
                 type="number"

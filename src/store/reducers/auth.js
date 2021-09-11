@@ -22,6 +22,7 @@ const reducer = (state = initialState, action) => {
     case actions.LOGOUT_START: return logoutStart(state, action);
     case actions.LOGOUT_SUCCESS: return logoutSuccess(state, action);
     case actions.LOGOUT_FAILURE: return logoutFailure(state, action);
+    case actions.DEFAULT_AUTH: return defaultAuth(state, action);
     default:
       return state;
   }
@@ -82,6 +83,10 @@ const logoutSuccess = (state, action) => {
 
 const logoutFailure = (state, action) => {
   return updateObject(state, { isLoading: false, error: action.payload });
+}
+
+const defaultAuth = (state, action) => {
+  return initialState;
 }
 
 export default reducer;
