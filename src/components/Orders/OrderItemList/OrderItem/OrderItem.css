@@ -9,6 +9,10 @@
   font-weight: 400;
 }
 
+.Order span.value {
+  font-weight: 700;
+}
+
 .Order .fa {
   transition: transform 0.3s linear;
   cursor: pointer;
@@ -35,8 +39,8 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .Order__Header p {
-  font-weight: 700;
   font-size: var(--font-size-md-lg);
 }
 

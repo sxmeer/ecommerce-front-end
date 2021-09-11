@@ -1,0 +1,30 @@
+.Footer {
+  width: 100%;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background-color: var(--color-background-dark);
+  padding-bottom: 1rem;
+}
+
+.Footer p {
+  padding: 0.5rem 0rem;
+  text-align: center;
+}
+
+.Footer__goToTop {
+  cursor: pointer;
+  background-color: var(--color-background-medium);
+}
+
+.Footer img {
+  margin: 2rem 0rem 1rem 0rem;
+  height: 3rem;
+  object-fit: contain;
+}
+
+.Footer a {
+  text-decoration: none;
+  color: var(--color-orange);
+}

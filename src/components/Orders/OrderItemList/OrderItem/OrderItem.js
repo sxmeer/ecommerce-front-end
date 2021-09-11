@@ -33,18 +33,17 @@ const Order = React.memo(({ order, isAdmin, editOrder }) => {
     <div className="Order">
       <div className={`upper ${isOpen ? 'open' : ''}`}>
         <div className="Order__Header">
-          <p>ORDER # {order._id}</p>
+          <p><span className="value">ORDER # {order._id}</span></p>
           <i className={`fa fa-angle-down ${isOpen ? 'open' : ''}`}
             onClick={() => setOpen((prev) => !prev)}></i>
         </div>
         <div className="Order__subdetailOne">
-          {order.transactionId && <p>Transaction Id: {"aeaigneiangiaeg"}</p>}
-          {isAdmin && <p>User: {order.user.email}</p>}
-          <p>Address: {order.address}</p>
-          <p>Payment Method: {PAYMENT_METHOD[order.paymentMethod]}</p>
-          <p>Booked on: {getFormattedDate(order.createdAt)}</p>
-          <p>Last updated on: {getFormattedDate(order.updatedAt)}</p>
-          <p>Payment Method: {PAYMENT_METHOD[order.paymentMethod]}</p>
+          {order.transactionId && <p>Transaction Id: <span className="value">{order.transactionId}</span></p>}
+          {isAdmin && <p>User: <span className="value">{order.user.email}</span></p>}
+          <p>Address: <span className="value">{order.address}</span></p>
+          <p>Payment Method: <span className="value">{PAYMENT_METHOD[order.paymentMethod]}</span></p>
+          <p>Booked on: <span className="value">{getFormattedDate(order.createdAt)}</span></p>
+          <p>Last updated on: <span className="value">{getFormattedDate(order.updatedAt)}</span></p>
         </div>
         <div className="Order__optionsContainer">
           <div className="Order__options">
@@ -61,7 +60,7 @@ const Order = React.memo(({ order, isAdmin, editOrder }) => {
                 })}
               </select>
               :
-              <p>{ORDER_STATUS[editState.orderStatus]}</p>
+              <p><span className="value">{ORDER_STATUS[editState.orderStatus]}</span></p>
             }
 
           </div>
@@ -79,7 +78,7 @@ const Order = React.memo(({ order, isAdmin, editOrder }) => {
                 })}
               </select>
               :
-              <p>{PAYMENT_STATUS[editState.paymentStatus]}</p>
+              <p><span className="value">{PAYMENT_STATUS[editState.paymentStatus]}</span></p>
             }
 
           </div>
@@ -91,8 +90,12 @@ const Order = React.memo(({ order, isAdmin, editOrder }) => {
             <p>Order breakdown:</p>
             {order.products.map((productEl, index) => {
               return <div className="Order__breakdownItem" key={productEl._id}>
-                <p className="Order__breakdownItemName">{index + 1 + ") " + productEl.product.name}</p>
-                <p className="Order__breakdownItemPrice">{"₹" + productEl.product.price + " * " + productEl.count + " = ₹" + productEl.totalPrice}</p>
+                <p className="Order__breakdownItemName">
+                  {index + 1 + ") "}  <span className="value">{productEl.product.name}</span>
+                </p>
+                <p className="Order__breakdownItemPrice">
+                  {"₹" + productEl.product.price + " * " + productEl.count + " = ₹" + productEl.totalPrice}
+                </p>
               </div>
             })}
           </div>

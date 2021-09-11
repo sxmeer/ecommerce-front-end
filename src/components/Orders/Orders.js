@@ -81,7 +81,7 @@ const Orders = props => {
           {!props.isLoading && props.orders.length > 0 &&
             <div className="AllOrders__pageCountContainer">
               <p>Total {props.totalOrders} {props.totalOrders > 1 ? 'Orders' : 'Order'}</p>
-              <p>page {props.page} of {parseInt(Math.ceil(props.totalOrders / props.limit))}</p>
+              <p>Page {props.page} of {parseInt(Math.ceil(props.totalOrders / props.limit))}</p>
             </div>
           }
           <OrderItemList orders={props.orders} />
