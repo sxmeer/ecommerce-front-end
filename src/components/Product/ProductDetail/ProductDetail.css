@@ -1,7 +1,6 @@
 .ProductDetail {
   max-width: 1020px;
-  margin: auto;
-  margin-top: 2.5rem;
+  margin: 2.5rem auto;
   display: flex;
   border-radius: 1rem;
   background-color: white;

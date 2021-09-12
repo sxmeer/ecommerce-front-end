@@ -14,7 +14,7 @@
   margin-top: auto;
 }
 
-.Home__containerProductsList p {
+.Home__containerProductsListNoProducts {
   font-size: var(--font-size-md);
   text-align: center;
   margin-top: 1rem;

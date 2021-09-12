@@ -71,7 +71,8 @@ const Home = props => {
       <div className="Home__container">
         <div className="Home__containerProducts">
           <div className="Home__containerProductsList">
-            {!props.isLoading && props.products.length === 0 && <p>No products 👻</p>}
+            {!props.isLoading && props.products.length === 0 &&
+              <p className="Home__containerProductsListNoProducts">No products 👻</p>}
             <ProductList addToCart={addToCart} products={props.products} />
           </div>
           <div className="Home__containerProductsPagination">
